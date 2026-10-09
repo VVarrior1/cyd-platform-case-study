@@ -8,7 +8,7 @@ The production code is private. This repo contains no code from it, only the arc
 |---|---|
 | **Role** | Sole engineer: design, build, deploy, operate |
 | **Timeline** | May 2025 to present |
-| **Scale** | ~300 active families across 4 Calgary venues; 1,000+ commits |
+| **Scale** | ~300 active families across 5 Calgary venues; 1,000+ commits |
 | **Stack** | Next.js 15 (App Router), TypeScript, Vercel, Google Sheets API, Stripe, Twilio, Resend, Vercel Cron, TeamSnap API, Gemini |
 
 ## The problem
@@ -23,7 +23,7 @@ The academy is a brick-and-mortar business: coaches, gyms and fields, and famili
 
 ## What I built
 
-- **Registration funnel.** A multi-step flow (program and venue, then child and parent details, then schedule, then payment) that only offers the age groups, days and payment plans each venue actually runs. Groups can be marked full. All pricing, season dates and payment plans come from one config module, so a price change is a one-line edit instead of a hunt through the site.
+- **Registration funnel.** A three-step flow (parent and child details, then venue, plan and schedule, then payment) that only offers venues and groups that fit the child's age, and only the plans each venue actually runs. Groups can be marked full. All pricing, season dates and payment plans come from one config module, so a price change is a one-line edit instead of a hunt through the site.
 - **Payments.** Stripe Checkout for three payment models (pay in full, fixed instalment plans, open monthly subscriptions), plus payment links and a manual-registration screen for families who pay in person.
 - **Roster sync.** A paid sign-up is added to the right team in TeamSnap and sent an invite automatically, so coaches see new players without anyone retyping them.
 - **Parent communication.** Transactional email and SMS on sign-up; scheduled reminders, follow-ups and abandoned-checkout sequences; and a broadcast composer for schedule changes that shows a live SMS segment and cost count before anything is sent.
@@ -33,7 +33,7 @@ The academy is a brick-and-mortar business: coaches, gyms and fields, and famili
 
 ## Results
 
-- **~300 active families across 4 venues** register and pay online, without staff entering anything by hand.
+- **~300 active families across 5 venues** register and pay online, without staff entering anything by hand.
 - **Instalment and subscription billing runs without manual invoicing**, and a daily reconciliation job confirms that plans stop when they're supposed to (see [payment models](#2-stripe-payment-models)).
 - **New players reach their team's roster automatically** once they've paid.
 - **SMS segments cut by up to 40% on longer notices** by keeping messages in the cheaper GSM-7 encoding (see [the SMS fix](#4-the-gsm-7-vs-ucs-2-sms-fix)).
@@ -170,15 +170,15 @@ A second, separate fix in the same pass: outbound texts were going through Twili
 
 ## Screenshots
 
-> Screenshots are blurred to protect family information.
+From the public registration flow, October 2026. Admin screens are left out because they show family information.
 
-| View | Screenshot |
-|---|---|
-| Registration: choose program and venue | _coming soon_ |
-| Checkout: payment plan selection | _coming soon_ |
-| Admin: season roster | _coming soon_ |
-| Broadcast composer with live segment counter | _coming soon_ |
-| Parent SMS confirmation | _coming soon_ |
+**Choosing a venue.** Venues are filtered by the child's age: groups that are full, or that don't run for that age, are shown but can't be picked.
+
+![Venue picker showing five Calgary venues with region badges, schedules, a full group and an age-ineligible venue](screenshots/venue-picker.png)
+
+**Choosing a plan.** Each season plan can be paid in full or in monthly instalments, all priced from the same season config.
+
+![Plan picker showing 1-day and 2-day options, each payable in full or over five months](screenshots/plan-picker.png)
 
 ## Links
 
